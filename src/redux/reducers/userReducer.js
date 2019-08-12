@@ -19,6 +19,8 @@ const userReducer = (state = initial_state, action) => {
       return { ...state, user_info: action.payload, is_user_info_available: true, is_loading: false };
     case "REGISTRATION_IN_PROGRESS":
       return { ...state, is_loading: true };
+    case "REGISTRATION_FAILED":
+      return { ...state, is_loading: false};
     case "REGISTRATION_FINALISED":
       return { ...state, is_loading: false };
     case "LOGOUT_USER":

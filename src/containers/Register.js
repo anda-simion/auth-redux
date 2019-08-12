@@ -4,6 +4,7 @@ import { push } from "connected-react-router";
 import RegisterForm from "../components/RegisterForm";
 import { register } from "../redux/actions/registerActions";
 import { authenticate } from "../redux/actions/authActions";
+import { registrationFailed } from "../redux/actions/registerActions";
 import { addNotificationWithTimeout } from "../redux/actions/notificationActions";
 
 class Register extends Component {
@@ -13,6 +14,7 @@ class Register extends Component {
     };
 
     onRegisterError = () => {
+        this.props.registrationFailed();
         this.props.addNotificationWithTimeout("Error during registration", "error");
     };
 
@@ -45,5 +47,11 @@ class Register extends Component {
         )
     }
 }
-
-export default connect(null, {register, authenticate, addNotificationWithTimeout, push})(Register);
+const mapDispatchToProps = {
+    register, 
+    authenticate, 
+    registrationFailed, 
+    addNotificationWithTimeout, 
+    push
+}
+export default connect(null, mapDispatchToProps)(Register);

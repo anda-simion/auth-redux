@@ -51,7 +51,11 @@ export const register = (
 
 export const registrationInProgress = _ => ({
     type: "REGISTRATION_IN_PROGRESS"
-  });
+});
+
+export const registrationFailed = _ => ({
+    type: "REGISTRATION_FAILED"
+});
 
 export const registrationFinalised = _ => ({
     type: "REGISTRATION_FINALISED"
