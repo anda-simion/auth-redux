@@ -8,9 +8,3 @@ a {
   padding: 10px 10px;
   font-size: 20px;
 }
-
-input.validation-error {
-  border-color: red;
-  background-color: rgba(255, 0, 0, 0.3);
-  opacity: 0.6;
-}

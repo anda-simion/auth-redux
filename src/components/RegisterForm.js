@@ -29,6 +29,8 @@ class RegisterForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    // validate_errors will undefined if there are no validation error
+    // otherwise it will be an object with the following format {<attribute>: [<error>, <error>, ...]}
     let validation_errors = validate(
       {
         email: this.state.email,
