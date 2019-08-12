@@ -1,0 +1,16 @@
+div.notification {
+    border: solid;
+    text-align: center;
+  }
+  
+  div.error {
+    background-color: red;
+  }
+  
+  div.success {
+    background-color: green;
+  }
+  
+  div.info {
+    background-color: blue;
+  }

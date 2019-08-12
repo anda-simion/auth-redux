@@ -1,19 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { push } from "connected-react-router";
 import LoginForm from "../components/LoginForm";
-import { sendLoginRequest } from "../redux/actions/actions";
+import { authenticate, loginFailed } from "../redux/actions/authActions";
+import { addNotificationWithTimeout } from "../redux/actions/notificationActions";
 
-export class Login extends Component {
-  onLoginSuccess = _ => {
-    console.log("Login: success");
+class Login extends Component {
+  onLoginSuccess = () => {
+    this.props.addNotificationWithTimeout("Login successfull", "success");
+    this.props.addNotificationWithTimeout("You are redirected to dashboard", "info");
+    this.props.push("/dashboard");
   };
 
-  onLogingError = _ => {
-    console.log("Login: error");
+  onLogingError = () => {
+    this.props.loginFailed();
+    this.props.addNotificationWithTimeout("Wrong user name or password", "error");
   };
 
   performSubmit = (user_name, password) => {
-    this.props.sendLoginRequest(user_name, password, this.onLoginSuccess, this.onLogingError);
+    this.props.authenticate(user_name, password, this.onLoginSuccess, this.onLogingError);
   };
 
   render() {
@@ -25,11 +30,8 @@ export class Login extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  sendLoginRequest: userInfo => dispatch(sendLoginRequest(userInfo))
-});
 
 export default connect(
   null,
-  mapDispatchToProps
+  {push, authenticate, loginFailed, addNotificationWithTimeout}
 )(Login);

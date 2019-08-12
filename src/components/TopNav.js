@@ -1,19 +1,38 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import { isLoggedIn } from "../services/users";
 
 class TopNav extends Component {
   constructor(props) {
     super(props);
 
     const auth_items = [
-      { key: "/", label: "Home" },
-      { key: "/login", label: "Login" },
-      { key: "/register", label: "Register" }
+      { key: "/dashboard", label: "Dashboard" },
+      { key: "/analysis", label: "Analysis" },
+      { key: "/logout", label: "Logout" }
     ];
 
+    const not_auth_items = [{ key: "/login", label: "Login" }, { key: "/register", label: "Register" }];
+    let menu_items = [{ key: "/", label: "Home" }];
+
+    if (isLoggedIn()) {
+      console.log("isLoggedIn should be true", isLoggedIn())
+      menu_items = menu_items.concat(auth_items);
+    } else {
+      console.log("isLoggedIn should be false", isLoggedIn())
+      menu_items = menu_items.concat(not_auth_items);
+    }
+
     this.state = {
-      menu_items: auth_items
+      menu_items: menu_items,
+      is_logged_in: isLoggedIn()
     };
+  }
+
+  componentDidMount = () => {
+    if (isLoggedIn()) {
+      console.log("isLoggedIn from Dashboard", isLoggedIn())
+    }
   }
 
   render() {
@@ -37,3 +56,4 @@ class TopNav extends Component {
 }
 
 export default TopNav;
+
