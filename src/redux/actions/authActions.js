@@ -4,42 +4,38 @@ import { getLoggedInUser, getUserGuidFromAccessToken } from "../../services/user
 
 export const authenticate = (user_name, password, onLoginSuccess, onLoginError) => {
   return dispatch => {
-
     dispatch(userIsLoggingIn());
 
     fetch(`${IAM_API}/auth`, {
       method: "POST",
       headers: {
-          "Content-Type": "application/json"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({ user_name: user_name, password: password })
     })
-    .then(response => {
+      .then(response => {
         if (response.status === 201) {
-            return response.json();
+          return response.json();
         } else {
-        throw new Error(`Login error, status code ${response.status}`);
+          throw new Error(`Login error, status code ${response.status}`);
         }
-    })
-    .then(body => {
+      })
+      .then(body => {
         window.localStorage.setItem("access_token", body.access_token);
         dispatch(userIsLoggedIn());
         onLoginSuccess();
         const access_token = body.access_token;
         const user_guid = getUserGuidFromAccessToken(access_token);
-        return getLoggedInUser(access_token, user_guid)
-    })
-    .then(user_info => {
-      console.log("user_info", user_info)
-      dispatch(userInfoIsAvailable(user_info))
-    })
-    .catch(error => {
+        return getLoggedInUser(access_token, user_guid);
+      })
+      .then(user_info => {
+        dispatch(userInfoIsAvailable(user_info));
+      })
+      .catch(error => {
         onLoginError();
-    })
-
+      });
   };
 };
-
 
 export const userIsLoggingIn = _ => ({
   type: "USER_IS_LOGGING_IN"

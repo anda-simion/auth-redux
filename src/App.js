@@ -7,15 +7,14 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import TopNav2 from "./components/TopNav2";
-import Logout from  "./containers/Logout"
+import Logout from "./containers/Logout";
 import "./App.css";
 import NotificationList from "./components/notifications/NotificationList";
 
 function App({ history }) {
-  console.log("history", history)
   return (
     <ConnectedRouter history={history}>
-    <NotificationList />
+      <NotificationList />
       <TopNav2 />
       <Switch>
         <Route path="/" component={HomePage} exact />
@@ -31,6 +30,5 @@ function App({ history }) {
 App.propTypes = {
   history: PropTypes.object
 };
-
 
 export default App;

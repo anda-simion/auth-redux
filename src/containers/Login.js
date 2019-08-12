@@ -30,8 +30,7 @@ class Login extends Component {
   }
 }
 
-
 export default connect(
   null,
-  {push, authenticate, loginFailed, addNotificationWithTimeout}
+  { push, authenticate, loginFailed, addNotificationWithTimeout }
 )(Login);

@@ -16,10 +16,8 @@ class TopNav extends Component {
     let menu_items = [{ key: "/", label: "Home" }];
 
     if (isLoggedIn()) {
-      console.log("isLoggedIn should be true", isLoggedIn())
       menu_items = menu_items.concat(auth_items);
     } else {
-      console.log("isLoggedIn should be false", isLoggedIn())
       menu_items = menu_items.concat(not_auth_items);
     }
 
@@ -27,12 +25,6 @@ class TopNav extends Component {
       menu_items: menu_items,
       is_logged_in: isLoggedIn()
     };
-  }
-
-  componentDidMount = () => {
-    if (isLoggedIn()) {
-      console.log("isLoggedIn from Dashboard", isLoggedIn())
-    }
   }
 
   render() {
@@ -56,4 +48,3 @@ class TopNav extends Component {
 }
 
 export default TopNav;
-
