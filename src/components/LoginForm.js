@@ -38,27 +38,37 @@ class LoginForm extends Component {
       this.props.addValidationErrors(validation_errors);
     }
   };
-  
+
   render() {
     return (
       <div>
-      <form onSubmit={this.submitForm}>
-        <input type="text" name="user_name" value={this.state.user_name} onChange={this.handleInputChange} />
-        <label>User</label>
-        <ValidationError message={this.props.validation_errors["user_name"]} />
-        <br />
+        <form onSubmit={this.submitForm}>
+          <input
+            className={this.props.validation_errors.user_name && "validation-error"}
+            type="text"
+            name="user_name"
+            value={this.state.user_name}
+            onChange={this.handleInputChange}
+          />
+          <label>User</label>
+          <ValidationError message={this.props.validation_errors.user_name} />
+          <br />
 
-        <input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
-        <label>Password</label>
-        <ValidationError message={this.props.validation_errors["password"]} />
-        <br />
- 
-        <Button htmlType="submit" type="primary" loading={this.props.is_loading}> 
-          {
-            this.props.is_loading ? "Loading" : "Login"
-          }
-        </Button>
-      </form>
+          <input
+            className={this.props.validation_errors.password && "validation-error"}
+            type="password"
+            name="password"
+            value={this.state.password}
+            onChange={this.handleInputChange}
+          />
+          <label>Password</label>
+          <ValidationError message={this.props.validation_errors.password} />
+          <br />
+
+          <Button htmlType="submit" type="primary" loading={this.props.is_loading}>
+            {this.props.is_loading ? "Loading" : "Login"}
+          </Button>
+        </form>
       </div>
     );
   }
@@ -74,4 +84,7 @@ const mapDispatchToProps = dispatch => ({
   removeValidationErrors: _ => dispatch(removeValidationErrors())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginForm);
