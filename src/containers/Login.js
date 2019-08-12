@@ -22,9 +22,10 @@ class Login extends Component {
   };
 
   render() {
+    console.log("props from Login container", this.props);
     return (
       <div>
-        <LoginForm onSubmit={this.performSubmit} />
+        <LoginForm submitForm={this.performSubmit} />
       </div>
     );
   }

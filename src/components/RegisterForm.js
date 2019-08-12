@@ -48,6 +48,10 @@ class RegisterForm extends Component {
     }
   };
 
+  componentWillUnmount = _ => {
+    this.props.removeValidationErrors();
+  };
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>

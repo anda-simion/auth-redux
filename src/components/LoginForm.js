@@ -22,7 +22,7 @@ class LoginForm extends Component {
     this.setState(new_state);
   };
 
-  submitForm = e => {
+  handleSubmit = e => {
     e.preventDefault();
     let validation_errors = validate(
       {
@@ -33,16 +33,20 @@ class LoginForm extends Component {
     );
     if (!validation_errors) {
       this.props.removeValidationErrors();
-      this.props.onSubmit(this.state.user_name, this.state.password);
+      this.props.submitForm(this.state.user_name, this.state.password);
     } else {
       this.props.addValidationErrors(validation_errors);
     }
   };
 
+  componentWillUnmount = _ => {
+    this.props.removeValidationErrors();
+  };
+
   render() {
     return (
       <div>
-        <form onSubmit={this.submitForm}>
+        <form onSubmit={this.handleSubmit}>
           <input
             className={this.props.validation_errors.user_name && "validation-error"}
             type="text"
