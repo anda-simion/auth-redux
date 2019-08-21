@@ -1,16 +1,10 @@
 import fetch from "cross-fetch";
 import { IAM_API } from "../config";
 
-//fetch returns a promise??
 
-export const getLoggedInUser = (access_token, user_guid) => {
+export const getLoggedInUser = () => {
     const getUserPromise = new Promise((resolve, reject) => {
-      fetch(`${IAM_API}/user/${user_guid}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token}`
-        }
-      })
+      fetchWithAuthorization()
         .then(response => {
           if (response.status === 200) {
             return response.json();
@@ -31,6 +25,21 @@ export const getLoggedInUser = (access_token, user_guid) => {
   
     return getUserPromise;
 };
+
+
+export const fetchWithAuthorization = ( options={} ) => {
+  const access_token = window.localStorage.getItem("access_token");
+  const user_guid = getUserGuidFromAccessToken(access_token);
+  const url = `${IAM_API}/user/${user_guid}`;
+  const merged_headers = Object.assign({
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${access_token}`
+  }, options.headers);
+  const merged_options = Object.assign(options, {
+    headers: merged_headers
+  });
+  return fetch(url, merged_options);
+}
 
 export const isLoggedIn = () => {
     return window.localStorage.getItem("access_token") ? true : false;

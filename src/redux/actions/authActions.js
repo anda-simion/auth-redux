@@ -1,6 +1,6 @@
 import fetch from "cross-fetch";
 import { IAM_API } from "../../config";
-import { getLoggedInUser, getUserGuidFromAccessToken } from "../../services/users";
+import { getLoggedInUser } from "../../services/users";
 
 export const authenticate = (user_name, password, onLoginSuccess, onLoginError) => {
   return dispatch => {
@@ -24,9 +24,7 @@ export const authenticate = (user_name, password, onLoginSuccess, onLoginError) 
         window.localStorage.setItem("access_token", body.access_token);
         dispatch(userIsLoggedIn());
         onLoginSuccess();
-        const access_token = body.access_token;
-        const user_guid = getUserGuidFromAccessToken(access_token);
-        return getLoggedInUser(access_token, user_guid);
+        return getLoggedInUser();
       })
       .then(user_info => {
         dispatch(userInfoIsAvailable(user_info));
