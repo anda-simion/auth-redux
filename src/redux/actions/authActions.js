@@ -1,8 +1,9 @@
 import fetch from "cross-fetch";
+import { push } from "connected-react-router";
 import { IAM_API } from "../../config";
-import { getLoggedInUser } from "../../services/users";
+import { addNotificationWithTimeout } from "../actions/notificationActions";
 
-export const authenticate = (user_name, password, onLoginSuccess, onLoginError) => {
+export const authenticate = (user_name, password) => {
   return dispatch => {
     dispatch(userIsLoggingIn());
 
@@ -21,16 +22,16 @@ export const authenticate = (user_name, password, onLoginSuccess, onLoginError) 
         }
       })
       .then(body => {
-        window.localStorage.setItem("access_token", body.access_token);
+        //body is a object with access_token and refresh_token
         dispatch(userIsLoggedIn());
-        onLoginSuccess();
-        return getLoggedInUser();
-      })
-      .then(user_info => {
-        dispatch(userInfoIsAvailable(user_info));
+        window.localStorage.setItem("access_token", body.access_token);
+        dispatch(addNotificationWithTimeout("Login successfull", "success"));
+        dispatch(addNotificationWithTimeout("You are redirected to dashboard", "info"));
+        dispatch(push("/dashboard"));
       })
       .catch(error => {
-        onLoginError();
+        dispatch(loginFailed());
+        dispatch(addNotificationWithTimeout(error.message, "error"));
       });
   };
 };

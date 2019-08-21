@@ -10,7 +10,7 @@ const userReducer = (state = initial_state, action) => {
     case "USER_IS_LOGGING_IN":
       return { ...state, is_loading: true };
     case "LOGIN_FAILED":
-      return { ...state, is_loading: false };
+      return { ...state, is_loading: false, is_logged_in: false };
     case "USER_IS_LOGGED_IN":
       return { ...state, is_logged_in: true, is_loading: false };
     case "USER_INFO_IS_LOADING":
@@ -24,7 +24,7 @@ const userReducer = (state = initial_state, action) => {
     case "REGISTRATION_FINALISED":
       return { ...state, is_loading: false };
     case "LOGOUT_USER":
-      return { ...state, user_info: null, is_user_info_available: false, is_logged_in: false };
+      return { ...state, user_info: null, is_user_info_available: false, is_loading: false, is_logged_in: false };
     default:
       return state;
   }
