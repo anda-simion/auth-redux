@@ -4,13 +4,13 @@ div.notification {
 }
 
 div.error {
-  background-color: red;
+  background-color: #ff4500;
 }
 
 div.success {
-  background-color: green;
+  background-color: #3cb371;
 }
 
 div.info {
-  background-color: blue;
+  background-color: #6495ed;
 }
