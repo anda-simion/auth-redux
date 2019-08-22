@@ -8,28 +8,9 @@ import { registrationFailed } from "../redux/actions/registerActions";
 import { addNotificationWithTimeout } from "../redux/actions/notificationActions";
 
 class Register extends Component {
-  onRegisterSuccess = (email, password) => {
-    this.props.authenticate(email, password, this.onLoginSuccess, this.onLoginError);
-    this.props.addNotificationWithTimeout("Registration successfull", "success");
-  };
-
-  onRegisterError = () => {
-    this.props.registrationFailed();
-    this.props.addNotificationWithTimeout("Error during registration", "error");
-  };
-
-  onLoginSuccess = () => {
-    this.props.addNotificationWithTimeout("Login successfull", "success");
-    this.props.addNotificationWithTimeout("You are redirected to dashboard", "info");
-    this.props.push("/dashboard");
-  };
-
-  onLoginError = () => {
-    this.props.addNotificationWithTimeout("Wrong user name or password", "error");
-  };
 
   handleSubmit = (email, first_name, last_name, password) => {
-    this.props.register(email, first_name, last_name, password, this.onRegisterSuccess, this.onRegisterError);
+    this.props.register(email, first_name, last_name, password);
   };
 
   render() {

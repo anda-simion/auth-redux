@@ -1,50 +1,55 @@
-import React, { Component } from "react";
+import React from 'react'
 import { NavLink } from "react-router-dom";
-import { isLoggedIn } from "../services/users";
+import { connect } from "react-redux";
 
-class TopNav extends Component {
-  constructor(props) {
-    super(props);
-
+const TopNav = (props) => {
     const auth_items = [
-      { key: "/dashboard", label: "Dashboard" },
-      { key: "/analysis", label: "Analysis" },
-      { key: "/logout", label: "Logout" }
+        { key: "/dashboard", label: "Dashboard" },
+        { key: "/analysis", label: "Analysis" },
+        { key: "/logout", label: "Logout" }
     ];
 
     const not_auth_items = [{ key: "/login", label: "Login" }, { key: "/register", label: "Register" }];
-    let menu_items = [{ key: "/", label: "Home" }];
 
-    if (isLoggedIn()) {
-      menu_items = menu_items.concat(auth_items);
+    const general_items = [{ key: "/", label: "Home" }];
+
+    let menu_items = general_items;
+
+    if(props.is_logged_in) {
+        menu_items = menu_items.concat(auth_items);
     } else {
-      menu_items = menu_items.concat(not_auth_items);
-    }
-
-    this.state = {
-      menu_items: menu_items,
-      is_logged_in: isLoggedIn()
+        menu_items = menu_items.concat(not_auth_items)
     };
-  }
-
-  render() {
+    
     return (
-      <div>
-        {this.state.menu_items.map(menu_item => (
-          <NavLink
-            to={menu_item.key}
-            exact
-            key={menu_item.key}
-            activeStyle={{
-              fontWeight: "bold",
-              color: "red"
-            }}>
-            {menu_item.label}
-          </NavLink>
-        ))}
-      </div>
-    );
-  }
+        <div>
+            {
+                menu_items.map(menu_item => (
+                    <NavLink
+                        to={menu_item.key}
+                        exact
+                        key={menu_item.key}
+                        activeStyle={{
+                        fontWeight: "bold",
+                        color: "red"
+                        }}>
+                        {menu_item.label}
+                    </NavLink>
+                            ))
+            }
+            <span>
+                {
+                    props.is_user_info_available && `Logged as: ${props.user_info.f_name}`
+                }
+            </span>
+        </div>
+    )
 }
 
-export default TopNav;
+const mapStateToProps = (state) => ({
+    is_logged_in: state.userReducer.is_logged_in,
+    is_user_info_available: state.userReducer.is_user_info_available,
+    user_info: state.userReducer.user_info, 
+})
+
+export default connect(mapStateToProps, null)(TopNav);

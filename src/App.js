@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
-import TopNav2 from "./components/TopNav2";
+import TopNav from "./components/TopNav";
 import Logout from "./containers/Logout";
 import "./App.css";
 import NotificationList from "./components/notifications/NotificationList";
@@ -15,7 +15,7 @@ function App({ history }) {
   return (
     <ConnectedRouter history={history}>
       <NotificationList />
-      <TopNav2 />
+      <TopNav />
       <Switch>
         <Route path="/" component={HomePage} exact />
         <Route path="/login" component={LoginPage} />

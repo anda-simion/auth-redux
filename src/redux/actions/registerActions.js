@@ -1,13 +1,13 @@
 import fetch from "cross-fetch";
 import { IAM_API } from "../../config";
+import { addNotificationWithTimeout } from "./notificationActions";
+import { authenticate } from "./authActions";
 
 export const register = (
     email,
     first_name,
     last_name,
-    password,
-    onRegisterSuccess,
-    onRegisterError
+    password
   ) => {
       return dispatch => {
         dispatch(registrationInProgress());
@@ -40,11 +40,14 @@ export const register = (
             }
         })
         .then(body => {
-            onRegisterSuccess(email, password);
+            console.log(body)
+            dispatch(addNotificationWithTimeout("Registration successfull", "success"));
+            dispatch(authenticate(email, password))
         })
         .catch(error => {
+            dispatch(registrationFailed());
             let error_message = JSON.parse(error.message).message;
-            onRegisterError(error_message);
+            dispatch(addNotificationWithTimeout(error_message, "error"));
         });
     }
 };
