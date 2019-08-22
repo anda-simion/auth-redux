@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import RegisterForm from "../components/RegisterForm";
-import { register } from "../redux/actions/registerActions";
-import { authenticate } from "../redux/actions/authActions";
-import { registrationFailed } from "../redux/actions/registerActions";
-import { addNotificationWithTimeout } from "../redux/actions/notificationActions";
+import { authenticate, register } from "../store/user/operations";
+import { registrationFailed } from "../store/user/creators";
+import { addNotificationWithTimeout } from "../store/notifications/operations";
 
 class Register extends Component {
-
   handleSubmit = (email, first_name, last_name, password) => {
     this.props.register(email, first_name, last_name, password);
   };
@@ -21,6 +19,7 @@ class Register extends Component {
     );
   }
 }
+
 const mapDispatchToProps = {
   register,
   authenticate,
@@ -28,6 +27,7 @@ const mapDispatchToProps = {
   addNotificationWithTimeout,
   push
 };
+
 export default connect(
   null,
   mapDispatchToProps

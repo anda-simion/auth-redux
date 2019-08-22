@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Button } from "antd";
 import { validate } from "validate.js";
 import { login_constraints } from "../services/validators";
-import { addValidationErrors, removeValidationErrors } from "../redux/actions/validationActions";
+import { addValidationErrors, removeValidationErrors } from "../store/validations/creators";
 import ValidationError from "./ValidationError";
 
 class LoginForm extends Component {
@@ -79,8 +79,8 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  is_loading: state.userReducer.is_loading,
-  validation_errors: state.validationReducer.validation_errors
+  is_loading: state.user.is_loading,
+  validation_errors: state.validations.validation_errors
 });
 
 const mapDispatchToProps = dispatch => ({

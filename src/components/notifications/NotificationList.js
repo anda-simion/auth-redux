@@ -13,7 +13,7 @@ const NotificationList = props => {
 };
 
 const mapStateToProps = state => ({
-  notifications: state.notificationReducer.notifications
+  notifications: state.notifications.notifications
 });
 
 export default connect(

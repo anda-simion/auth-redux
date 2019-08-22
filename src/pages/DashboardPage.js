@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { Spin } from "antd";
 import { isLoggedIn } from "../services/users";
-import { getLoggedInUser } from "../redux/actions/userActions";
-import { logoutUser } from "../redux/actions/authActions";
+import { getLoggedInUser } from "../store/user/operations";
+import { logoutUser } from "../store/user/creators";
 
 class DashboardPage extends Component {
   componentDidMount = _ => {
@@ -27,10 +27,10 @@ class DashboardPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.userReducer.user_info,
-  is_user_info_available: state.userReducer.is_user_info_available,
-  is_loading: state.userReducer.is_loading,
-  is_logged_in: state.userReducer.is_logged_in
+  user: state.user.user_info,
+  is_user_info_available: state.user.is_user_info_available,
+  is_loading: state.user.is_loading,
+  is_logged_in: state.user.is_logged_in
 });
 
 export default connect(

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LoginForm from "../components/LoginForm";
-import { authenticate } from "../redux/actions/authActions";
+import { authenticate } from "../store/user/operations";
 
 class Login extends Component {
   performSubmit = (user_name, password) => {

@@ -8,8 +8,8 @@ import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import TopNav from "./components/TopNav";
 import Logout from "./containers/Logout";
-import "./App.css";
 import NotificationList from "./components/notifications/NotificationList";
+import "./App.css";
 
 function App({ history }) {
   return (
