@@ -2,15 +2,15 @@ const login_constraints = {
   user_name: {
     presence: true,
     length: {
-      minimum: 4,
-      message: "^must be at least 4 characters long"
+      minimum: 1,
+      message: "^Please fill this field"
     }
   },
   password: {
     presence: true,
     length: {
-      minimum: 4,
-      message: "^must be at least 4 characters long"
+      minimum: 1,
+      message: "^Please fill this field"
     }
   }
 };
@@ -39,7 +39,7 @@ const register_constraints = {
     presence: true,
     length: {
       minimum: 4,
-      message: "^must be at least 4 characters long"
+      message: "must be at least 6 characters long"
     }
   },
   repeat_password: {
