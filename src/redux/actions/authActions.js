@@ -48,15 +48,6 @@ export const userIsLoggedIn = _ => ({
   type: "USER_IS_LOGGED_IN"
 });
 
-export const userInfoIsLoading = _ => ({
-  type: "USER_INFO_IS_LOADING"
-});
-
-export const userInfoIsAvailable = user_info => ({
-  type: "USER_INFO_IS_AVAILABLE",
-  payload: user_info
-});
-
 export const logoutUser = _ => ({
   type: "LOGOUT_USER"
 });

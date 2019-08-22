@@ -1,8 +1,10 @@
+import {isLoggedIn} from "../../services/users";
+
 const initial_state = {
   user_info: null,
   is_user_info_available: false,
   is_loading: false,
-  is_logged_in: false
+  is_logged_in: isLoggedIn() //for when the user refreshes the page
 };
 
 const userReducer = (state = initial_state, action) => {
@@ -16,7 +18,7 @@ const userReducer = (state = initial_state, action) => {
     case "USER_INFO_IS_LOADING":
       return { ...state, is_loading: true };
     case "USER_INFO_IS_AVAILABLE":
-      return { ...state, user_info: action.payload, is_user_info_available: true, is_loading: false };
+      return { ...state, user_info: action.payload, is_user_info_available: true, is_loading: false};
     case "REGISTRATION_IN_PROGRESS":
       return { ...state, is_loading: true };
     case "REGISTRATION_FAILED":
