@@ -16,13 +16,13 @@ export const logoutUser = _ => ({
   type: types.LOGOUT_USER
 });
 
-export const userInfoIsLoading = _ => ({
-  type: types.USER_INFO_IS_LOADING
+export const userIsLoading = _ => ({
+  type: types.USER_IS_LOADING
 });
 
-export const userInfoIsAvailable = user_info => ({
-  type: types.USER_INFO_IS_AVAILABLE,
-  payload: user_info
+export const getUser = user => ({
+  type: types.GET_USER,
+  payload: user
 });
 
 export const registrationInProgress = _ => ({

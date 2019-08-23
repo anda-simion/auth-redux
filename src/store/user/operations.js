@@ -6,8 +6,8 @@ import {
   userIsLoggingIn,
   userIsLoggedIn,
   loginFailed,
-  userInfoIsLoading,
-  userInfoIsAvailable,
+  userIsLoading,
+  getUser,
   registrationInProgress,
   registrationFinalized,
   registrationFailed
@@ -49,7 +49,7 @@ export const authenticate = (user_name, password) => {
 
 export const getLoggedInUser = () => {
   return dispatch => {
-    dispatch(userInfoIsLoading());
+    dispatch(userIsLoading());
     const access_token = window.localStorage.getItem("access_token");
     const user_guid = getUserGuidFromAccessToken(access_token);
     fetchWithAuthorization(`${IAM_API}/user/${user_guid}`)
@@ -63,7 +63,7 @@ export const getLoggedInUser = () => {
       .then(body => {
         //body is a object that contains the user's info
         console.log("getLoggedInUser", body);
-        dispatch(userInfoIsAvailable(body));
+        dispatch(getUser(body));
       })
       .catch(error => {
         dispatch(addNotificationWithTimeout(error.message, "error"));

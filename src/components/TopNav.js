@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
 
 const TopNav = props => {
   const auth_items = [
@@ -35,18 +34,9 @@ const TopNav = props => {
           {menu_item.label}
         </NavLink>
       ))}
-      <span>{props.is_user_info_available && `Logged as: ${props.user_info.f_name}`}</span>
+      <span>{props.user && `Logged as: ${props.user.f_name}`}</span>
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  is_logged_in: state.user.is_logged_in,
-  is_user_info_available: state.user.is_user_info_available,
-  user_info: state.user.user_info
-});
-
-export default connect(
-  mapStateToProps,
-  null
-)(TopNav);
+export default TopNav;

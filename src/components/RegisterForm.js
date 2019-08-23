@@ -5,6 +5,8 @@ import { validate } from "validate.js";
 import { register_constraints } from "../services/validators";
 import { addValidationErrors, removeValidationErrors } from "../store/validations/creators";
 import ValidationError from "./ValidationError";
+import { isLoadingSelector } from "../store/user/selectors";
+import { validationsSelector } from "../store/validations/selectors";
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -131,8 +133,8 @@ class RegisterForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  is_loading: state.user.is_loading,
-  validation_errors: state.validations.validation_errors
+  is_loading: isLoadingSelector(state),
+  validation_errors: validationsSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
