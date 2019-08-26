@@ -1,1 +1,1 @@
-export const validationsSelector = state => state.validations.validation_errors;
+export const validationsSelector = state => state.validations;
