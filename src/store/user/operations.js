@@ -62,7 +62,6 @@ export const getLoggedInUser = () => {
       })
       .then(body => {
         //body is a object that contains the user's info
-        console.log("getLoggedInUser", body);
         dispatch(getUser(body));
       })
       .catch(error => {
@@ -108,7 +107,6 @@ export const register = (email, first_name, last_name, password) => {
         }
       })
       .then(body => {
-        console.log("register", body);
         dispatch(addNotificationWithTimeout("Registration successful", "success"));
         dispatch(authenticate(email, password));
       })
