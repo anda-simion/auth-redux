@@ -20,6 +20,10 @@ export const isLoggedIn = () => {
 };
 
 export const getUserGuidFromAccessToken = access_token => {
-  const token_body = JSON.parse(atob(access_token.split(".")[1]));
-  return token_body.identity;
+  try {
+    const token_body = JSON.parse(atob(access_token.split(".")[1]));
+    return token_body.identity;
+  } catch (e) {
+    console.log(e.message);
+  }
 };

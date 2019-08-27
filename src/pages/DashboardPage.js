@@ -2,17 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { Spin } from "antd";
-import { isLoggedIn } from "../services/users";
 import { getLoggedInUser } from "../store/user/operations";
 import { logoutUser } from "../store/user/creators";
 import { userSelector } from "../store/user/selectors";
 
 class DashboardPage extends Component {
   componentDidMount = _ => {
-    if (!isLoggedIn()) {
-      this.props.logoutUser();
-      this.props.push("/login");
-    } else if (!this.props.user) {
+    if (!this.props.user) {
       this.props.getLoggedInUser();
     }
   };

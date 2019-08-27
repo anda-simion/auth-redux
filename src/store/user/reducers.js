@@ -1,10 +1,11 @@
-import { isLoggedIn } from "../../services/users";
+//import { isLoggedIn } from "../../services/users";
 import * as types from "./types";
 
 const initial_state = {
   user: null,
   is_loading: false,
-  is_logged_in: isLoggedIn() //for when the user refreshes the page
+  is_logged_in: false,
+  access_token: null
 };
 
 const userReducer = (state = initial_state, action) => {
@@ -14,11 +15,11 @@ const userReducer = (state = initial_state, action) => {
     case types.LOGIN_FAILED:
       return { ...state, is_loading: false, is_logged_in: false };
     case types.USER_IS_LOGGED_IN:
-      return { ...state, is_logged_in: true, is_loading: false };
+      return { ...state, is_logged_in: true, is_loading: false, access_token: action.access_token };
     case types.USER_IS_LOADING:
       return { ...state, is_loading: true };
     case types.GET_USER:
-      return { ...state, user: action.payload, is_loading: false };
+      return { ...state, user: action.user, is_loading: false, is_logged_in: true };
     case types.REGISTRATION_IN_PROGRESS:
       return { ...state, is_loading: true };
     case types.REGISTRATION_FAILED:
@@ -26,7 +27,7 @@ const userReducer = (state = initial_state, action) => {
     case types.REGISTRATION_FINALIZED:
       return { ...state, is_loading: false };
     case types.LOGOUT_USER:
-      return { ...state, user: null, is_loading: false, is_logged_in: false };
+      return { ...state, user: null, is_loading: false, is_logged_in: false, access_token: null };
     default:
       return state;
   }

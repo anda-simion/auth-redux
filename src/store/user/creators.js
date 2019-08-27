@@ -8,8 +8,9 @@ export const loginFailed = _ => ({
   type: types.LOGIN_FAILED
 });
 
-export const userIsLoggedIn = _ => ({
-  type: types.USER_IS_LOGGED_IN
+export const userIsLoggedIn = access_token => ({
+  type: types.USER_IS_LOGGED_IN,
+  access_token: access_token
 });
 
 export const logoutUser = _ => ({
@@ -22,7 +23,7 @@ export const userIsLoading = _ => ({
 
 export const getUser = user => ({
   type: types.GET_USER,
-  payload: user
+  user: user
 });
 
 export const registrationInProgress = _ => ({
