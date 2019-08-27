@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
 import RegisterForm from "../components/RegisterForm";
-import { authenticate, register } from "../store/user/operations";
-import { registrationFailed } from "../store/user/creators";
-import { addNotificationWithTimeout } from "../store/notifications/operations";
+import { register } from "../store/user/operations";
+import { isLoadingSelector } from "../store/user/selectors";
+import { validationsSelector } from "../store/validations/selectors";
+import { addValidationErrors, removeValidationErrors } from "../store/validations/creators";
 
 class Register extends Component {
   handleSubmit = (email, first_name, last_name, password) => {
@@ -14,21 +14,24 @@ class Register extends Component {
   render() {
     return (
       <div>
-        <RegisterForm submitForm={this.handleSubmit} />
+        <RegisterForm
+          submitForm={this.handleSubmit}
+          is_loading={this.props.is_loading}
+          validation_errors={this.props.validation_errors}
+          addValidationErrors={this.props.addValidationErrors}
+          removeValidationErrors={this.props.removeValidationErrors}
+        />
       </div>
     );
   }
 }
 
-const mapDispatchToProps = {
-  register,
-  authenticate,
-  registrationFailed,
-  addNotificationWithTimeout,
-  push
-};
+const mapStateToProps = state => ({
+  is_loading: isLoadingSelector(state),
+  validation_errors: validationsSelector(state)
+});
 
 export default connect(
-  null,
-  mapDispatchToProps
+  mapStateToProps,
+  { register, addValidationErrors, removeValidationErrors }
 )(Register);

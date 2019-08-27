@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Button } from "antd";
 import { validate } from "validate.js";
 import { login_constraints } from "../services/validators";
-import { addValidationErrors, removeValidationErrors } from "../store/validations/creators";
-import { validationsSelector } from "../store/validations/selectors";
-import { isLoadingSelector } from "../store/user/selectors";
 import ValidationError from "./ValidationError";
 
 class LoginForm extends Component {
@@ -80,17 +76,4 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  is_loading: isLoadingSelector(state),
-  validation_errors: validationsSelector(state)
-});
-
-const mapDispatchToProps = dispatch => ({
-  addValidationErrors: validation_errors => dispatch(addValidationErrors(validation_errors)),
-  removeValidationErrors: _ => dispatch(removeValidationErrors())
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginForm);
+export default LoginForm;
