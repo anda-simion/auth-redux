@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { Spin } from "antd";
-import { getLoggedInUser } from "../store/user/operations";
-import { logoutUser } from "../store/user/creators";
-import { userSelector } from "../store/user/selectors";
+import { getLoggedInUser } from "../../store/user/operations";
+import { logoutUser } from "../../store/user/creators";
+import { userSelector } from "../../store/user/selectors";
 
 class DashboardPage extends Component {
   componentDidMount = _ => {
