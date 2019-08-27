@@ -15,10 +15,6 @@ export const fetchWithAuthorization = (url, options = {}) => {
   return fetch(url, merged_options);
 };
 
-export const isLoggedIn = () => {
-  return window.localStorage.getItem("access_token") ? true : false;
-};
-
 export const getUserGuidFromAccessToken = access_token => {
   try {
     const token_body = JSON.parse(atob(access_token.split(".")[1]));
