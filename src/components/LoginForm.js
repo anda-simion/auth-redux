@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Button } from "antd";
-import { validate } from "validate.js";
-import { login_constraints } from "../services/validators";
 import ValidationError from "./ValidationError";
 
 class LoginForm extends Component {
@@ -22,23 +20,7 @@ class LoginForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    let validation_errors = validate(
-      {
-        user_name: this.state.user_name,
-        password: this.state.password
-      },
-      login_constraints
-    );
-    if (!validation_errors) {
-      this.props.removeValidationErrors();
-      this.props.submitForm(this.state.user_name, this.state.password);
-    } else {
-      this.props.addValidationErrors(validation_errors);
-    }
-  };
-
-  componentWillUnmount = _ => {
-    this.props.removeValidationErrors();
+    this.props.submitForm(this.state.user_name, this.state.password);
   };
 
   render() {

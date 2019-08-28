@@ -1,6 +1,6 @@
 import fetch from "cross-fetch";
 import { push } from "connected-react-router";
-import { IAM_API } from "../../config";
+import { IAM_API } from "../../services/config";
 import { addNotificationWithTimeout } from "../notifications/operations";
 import {
   userIsLoggingIn,

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Button } from "antd";
-import { validate } from "validate.js";
-import { register_constraints } from "../services/validators";
 import ValidationError from "./ValidationError";
 
 class RegisterForm extends Component {
@@ -27,29 +25,14 @@ class RegisterForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    // validate_errors will undefined if there are no validation error
-    // otherwise it will be an object with the following format {<attribute>: [<error>, <error>, ...]}
-    let validation_errors = validate(
-      {
-        email: this.state.email,
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-        password: this.state.password,
-        repeat_password: this.state.repeat_password,
-        agreement_checked: this.state.agreement_checked
-      },
-      register_constraints
+    this.props.submitForm(
+      this.state.email,
+      this.state.first_name,
+      this.state.last_name,
+      this.state.password,
+      this.state.repeat_password,
+      this.state.agreement_checked
     );
-    if (!validation_errors) {
-      this.props.removeValidationErrors();
-      this.props.submitForm(this.state.email, this.state.first_name, this.state.last_name, this.state.password);
-    } else {
-      this.props.addValidationErrors(validation_errors);
-    }
-  };
-
-  componentWillUnmount = _ => {
-    this.props.removeValidationErrors();
   };
 
   render() {
