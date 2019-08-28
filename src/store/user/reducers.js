@@ -1,10 +1,11 @@
 import * as types from "./types";
+import { loadAccessTokenFromLocalStorage } from "../../services/users";
 
 const initial_state = {
   user: null,
   is_loading: false,
   is_logged_in: false,
-  access_token: null
+  access_token: loadAccessTokenFromLocalStorage()
 };
 
 const userReducer = (state = initial_state, action) => {

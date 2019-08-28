@@ -23,3 +23,13 @@ export const getUserGuidFromAccessToken = access_token => {
     console.log(e.message);
   }
 };
+
+export const loadAccessTokenFromLocalStorage = _ => {
+  try {
+    const access_token = window.localStorage.getItem("access_token");
+    if (access_token === null) return undefined;
+    return access_token;
+  } catch (e) {
+    console.log(e);
+  }
+};
