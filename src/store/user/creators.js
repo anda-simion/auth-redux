@@ -8,9 +8,10 @@ export const loginFailed = _ => ({
   type: types.LOGIN_FAILED
 });
 
-export const userIsLoggedIn = access_token => ({
+export const userIsLoggedIn = (access_token, refresh_token) => ({
   type: types.USER_IS_LOGGED_IN,
-  access_token: access_token
+  access_token: access_token,
+  refresh_token: refresh_token
 });
 
 export const logoutUser = _ => ({

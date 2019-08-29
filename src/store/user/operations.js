@@ -34,7 +34,7 @@ export const authenticate = (user_name, password) => {
       })
       .then(body => {
         //body is a object with access_token and refresh_token
-        dispatch(userIsLoggedIn(body.access_token));
+        dispatch(userIsLoggedIn(body.access_token, body.refresh_token));
         dispatch(addNotificationWithTimeout("Login successful", "success"));
         dispatch(addNotificationWithTimeout("You are redirected to dashboard", "info"));
         dispatch(push("/dashboard"));

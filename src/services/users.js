@@ -33,3 +33,13 @@ export const loadAccessTokenFromLocalStorage = _ => {
     console.log(e);
   }
 };
+
+export const loadRefreshTokenFromLocalStorage = _ => {
+  try {
+    const refresh_token = window.localStorage.getItem("refresh_token");
+    if (refresh_token === null) return undefined;
+    return refresh_token;
+  } catch (e) {
+    console.log(e);
+  }
+};

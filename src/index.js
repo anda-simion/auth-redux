@@ -9,7 +9,8 @@ const store = configureStore();
 
 const saveToLocalStorage = state => {
   try {
-    window.localStorage.setItem("access_token", state.user.access_token);
+    window.localStorage.setItem("access_token", state.user.IAM.access_token);
+    window.localStorage.setItem("refresh_token", state.user.IAM.refresh_token);
   } catch (e) {
     console.log(e);
   }
